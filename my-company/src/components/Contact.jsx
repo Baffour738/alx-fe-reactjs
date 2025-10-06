@@ -1,9 +1,52 @@
-function Home() {
+import { useState } from 'react';
+
+function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // <-- this is preventDefault
+    alert('Form submitted!');
+  };
+
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Welcome to Our Company</h1>
-      <p>We are dedicated to delivering excellence in all our services.</p>
+      <h1>Contact Us</h1>
+      <form onSubmit={handleSubmit}>  {/* <-- this is onSubmit */}
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          value={formData.name}
+          onChange={handleChange}
+          style={{ display: 'block', margin: '10px 0' }}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          value={formData.email}
+          onChange={handleChange}
+          style={{ display: 'block', margin: '10px 0' }}
+        />
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          value={formData.message}
+          onChange={handleChange}
+          style={{ display: 'block', margin: '10px 0' }}
+        />
+        <button type="submit">Send Message</button> {/* <-- this is button */}
+      </form>
     </div>
   );
 }
-export default Home;
+
+export default Contact;
