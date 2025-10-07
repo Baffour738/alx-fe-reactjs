@@ -5,6 +5,7 @@ import RecipeDetails from './components/RecipeDetails';
 
 function App() {
   return (
+    <Router>
     <div className="p-6">
       <nav className="mb-4">
         <Link to="/" className="text-blue-600">Home</Link>
@@ -24,6 +25,7 @@ function App() {
         <Route path="/recipes/:recipeId" element={<RecipeDetails />} />
       </Routes>
     </div>
+    </Router>
   );
 }
 
