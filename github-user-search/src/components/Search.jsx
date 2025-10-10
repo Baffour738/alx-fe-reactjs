@@ -59,9 +59,10 @@ const Search = () => {
   };
 
   return (
-    <div className="mx-auto max-w-4xl p-8 flex flex-col items-center justify-center text-center">
-      <h1 className="text-4xl font-bold mb-6">GitHub User Search</h1>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-4 gap-6 items-end place-items-center bg-white p-6 rounded-xl shadow-sm w-full">
+    <div className="mx-auto max-w-2xl p-6 flex flex-col items-center justify-center text-center">
+      <h1 className="text-4xl font-extrabold tracking-tight mb-3">GitHub User Search</h1>
+      <p className="text-gray-600 mb-6">Find users by username, location, and repository count.</p>
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end place-items-center bg-white p-6 rounded-2xl shadow-xl border border-gray-100 w-full">
         <div className="flex flex-col w-full">
           <label htmlFor="username" className="text-base font-semibold mb-2">Username</label>
           <input
@@ -70,7 +71,7 @@ const Search = () => {
             placeholder="octocat"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="h-12 px-4 text-lg rounded-md border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="h-12 px-4 text-lg rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
         <div className="flex flex-col w-full">
@@ -81,7 +82,7 @@ const Search = () => {
             placeholder="San Francisco"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="h-12 px-4 text-lg rounded-md border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="h-12 px-4 text-lg rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
         <div className="flex flex-col w-full">
@@ -93,27 +94,27 @@ const Search = () => {
             placeholder="10"
             value={minRepos}
             onChange={(e) => setMinRepos(e.target.value)}
-            className="h-12 px-4 text-lg rounded-md border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="h-12 px-4 text-lg rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
         <button
           type="submit"
-          className="h-12 md:h-12 px-6 text-lg bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full md:w-auto"
+          className="h-9 md:h-9 px-4 text-sm text-white rounded-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-500 hover:from-indigo-700 hover:via-indigo-600 hover:to-violet-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-md transition-colors w-full md:w-auto"
           disabled={loading}
         >
-          {loading ? "Searching..." : "Search"}
+          {loading ? "Searching…" : "Search 🔎"}
         </button>
       </form>
 
-      <div className="mt-8 w-full">
+      <div className="mt-6 w-full">
         {error && <p className="text-red-600 mb-4" role="alert">{error}</p>}
         {totalCount > 0 && (
           <p className="text-base text-gray-600 mb-4">{totalCount} users found</p>
         )}
-        <ul className="space-y-4 mx-auto max-w-2xl">
+        <ul className="space-y-4 mx-auto max-w-xl">
           {results.map((user) => (
-            <li key={user.id} className="flex items-center gap-5 p-4 rounded-xl border border-gray-200 bg-white shadow-sm">
-              <img src={user.avatar_url} alt={user.login} className="h-14 w-14 rounded-full" />
+            <li key={user.id} className="flex items-center gap-5 p-5 rounded-2xl border border-gray-100 bg-white shadow-md hover:shadow-lg transition-shadow">
+              <img src={user.avatar_url} alt={user.login} className="h-16 w-16 rounded-full ring-2 ring-gray-100" />
               <div className="flex-1 text-left">
                 <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 text-lg font-semibold hover:underline">{user.login}</a>
                 <div className="text-sm text-gray-600 mt-1">
@@ -129,10 +130,10 @@ const Search = () => {
           <div className="mt-6 flex justify-center">
             <button
               onClick={handleLoadMore}
-              className="h-12 px-6 text-lg rounded-md bg-gray-900 text-white hover:bg-gray-800 disabled:opacity-50"
+              className="h-12 px-8 text-lg rounded-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white hover:from-black hover:via-gray-900 hover:to-gray-800 disabled:opacity-50 shadow-lg"
               disabled={loading}
             >
-              {loading ? "Loading..." : "Load More"}
+              {loading ? "Loading…" : "Load More"}
             </button>
           </div>
         )}
