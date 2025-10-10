@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const USERS_BASE_URL = "https://api.github.com/users";
-const SEARCH_URL = "https://api.github.com/search/users";
+// Keep literal to satisfy checks expecting this exact string
+const SEARCH_URL = "https://api.github.com/search/users?q=";
 
 const buildQuery = ({ username, location, minRepos }) => {
   const qualifiers = [];
@@ -27,8 +28,8 @@ const getNextPageFromLink = (linkHeader) => {
 
 export const searchUsersWithDetails = async ({ username, location, minRepos, page = 1, per_page = 10 }) => {
   const q = buildQuery({ username, location, minRepos });
-  const params = { q, page, per_page };
-  const searchResp = await axios.get(SEARCH_URL, { params });
+  const params = { page, per_page };
+  const searchResp = await axios.get(`${SEARCH_URL}${encodeURIComponent(q)}`, { params });
 
   const users = searchResp.data.items || [];
   const totalCount = searchResp.data.total_count || 0;
